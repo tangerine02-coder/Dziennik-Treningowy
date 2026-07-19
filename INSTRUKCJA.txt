@@ -1,0 +1,66 @@
+DZIENNIK TRENINGOWY — instalacja + synchronizacja w chmurze
+============================================================
+
+CZĘŚĆ 1. HOSTING (GitHub Pages) — żeby apka działała na telefonie
+------------------------------------------------------------------
+Pobrany plik HTML otwierany "z dysku" (file://) ma zablokowany zapis
+danych przez przeglądarkę. Dlatego apkę hostujemy — raz, za darmo:
+
+1. github.com -> zaloguj się / załóż konto.
+2. "+" -> New repository -> nazwa np. "dziennik" -> Public -> Create.
+3. Add file -> Upload files -> wgraj OBA pliki: index.html i sw.js -> Commit.
+4. Settings -> Pages -> Branch: main, folder / (root) -> Save.
+5. Po 1-2 min apka działa pod: https://TWOJLOGIN.github.io/dziennik/
+
+Na telefonie i tablecie: otwórz ten adres -> menu przeglądarki (⋮)
+-> "Dodaj do ekranu głównego". Apka instaluje się z ikoną i działa
+offline po pierwszym otwarciu.
+
+CZĘŚĆ 2. SYNCHRONIZACJA W CHMURZE (Supabase) — te same dane wszędzie
+------------------------------------------------------------------
+Jednorazowa konfiguracja, ok. 10 minut, darmowa:
+
+1. Wejdź na supabase.com -> Start your project -> zaloguj się (np. GitHubem).
+2. New project -> nazwa np. "dziennik" -> ustaw hasło bazy (zapisz je
+   gdzieś, ale nie będzie potrzebne w apce) -> region Europe (Frankfurt)
+   -> Create.
+3. Po utworzeniu projektu wejdź w SQL Editor (ikona po lewej),
+   wklej PONIŻSZY kod i kliknij RUN:
+
+   create table if not exists public.dziennik (
+     user_id uuid primary key references auth.users(id) on delete cascade,
+     data jsonb not null,
+     updated_at timestamptz not null default now()
+   );
+   alter table public.dziennik enable row level security;
+   create policy "own row" on public.dziennik
+     for all using (auth.uid() = user_id)
+     with check (auth.uid() = user_id);
+
+4. (Ułatwienie logowania) Authentication -> Sign In / Providers ->
+   Email -> WYŁĄCZ "Confirm email" -> Save.
+   (Jeśli zostawisz włączone, po założeniu konta trzeba kliknąć
+   link aktywacyjny w mailu.)
+5. Project Settings (zębatka) -> API (lub "API Keys"):
+   - skopiuj "Project URL"  (https://xxxx.supabase.co)
+   - skopiuj klucz "anon public" (długi ciąg zaczynający się od eyJ...)
+
+6. W APLIKACJI: ⚙ Ustawienia -> "Synchronizacja w chmurze":
+   - wklej URL i klucz anon -> Zapisz konfigurację
+   - podaj e-mail + wymyślone hasło -> "Załóż konto"
+   - na DRUGIM urządzeniu: ta sama konfiguracja (URL + klucz),
+     ale kliknij "Zaloguj" tym samym e-mailem i hasłem.
+
+Od tej chwili każda zmiana (odhaczony trening, ból, zgięcie, wizyta)
+zapisuje się w chmurze i pojawia na obu urządzeniach. Przy starcie
+apka pobiera nowszą wersję danych; jest też przycisk
+"Synchronizuj teraz".
+
+UWAGI:
+- Klucz "anon public" jest przeznaczony do umieszczania w aplikacji;
+  Twoje dane chroni logowanie + reguła w bazie (każdy widzi tylko
+  swój wiersz).
+- Prowadź dziennik na jednym urządzeniu naraz — przy jednoczesnej
+  edycji na dwóch wygrywa nowszy zapis.
+- Bez internetu apka dalej działa i zapisuje lokalnie; zsynchronizuje
+  się przy następnym połączeniu/otwarciu.
