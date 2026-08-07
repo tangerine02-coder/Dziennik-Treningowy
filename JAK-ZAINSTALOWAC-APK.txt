@@ -1,0 +1,90 @@
+===========================================================
+  DZIENNIK TRENINGOWY — instalacja na telefonie Huawei
+===========================================================
+
+Plik: DziennikTreningowy.apk  (3,3 MB)
+
+Cała aplikacja siedzi w środku tego pliku. Nie potrzebuje
+internetu, GitHuba, Chrome'a ani usług Google.
+
+
+-----------------------------------------------------------
+INSTALACJA
+-----------------------------------------------------------
+
+1. Przerzuć plik DziennikTreningowy.apk na telefon.
+   Sposób dowolny: kabel USB, Bluetooth, wysłanie sobie
+   mailem, Huawei Share.
+
+2. W telefonie otwórz Menedżer plików i dotknij pliku APK.
+
+3. Telefon zapyta o zgodę na instalację z nieznanego źródła.
+   Wejdź w Ustawienia -> zezwól dla Menedżera plików
+   (lub aplikacji, z której instalujesz) i wróć.
+
+4. Potwierdź "Zainstaluj".
+
+5. Ikona "Dziennik Treningowy" pojawi się między aplikacjami.
+
+Uwaga: przy pierwszym uruchomieniu Huawei może pokazać
+ostrzeżenie, że aplikacja nie pochodzi z AppGallery.
+To normalne dla aplikacji instalowanych ręcznie.
+
+
+-----------------------------------------------------------
+ZAPISYWANIE DANYCH
+-----------------------------------------------------------
+
+* Wszystko zapisuje się samo, od razu po każdej zmianie.
+
+* Dane leżą w prywatnej pamięci aplikacji. Nie są przypisane
+  do żadnego adresu internetowego — to duża zaleta względem
+  wersji przeglądarkowej. Nic nie wychodzi na zewnątrz.
+
+* Aplikacja robi sobie automatyczne migawki raz dziennie
+  (Ustawienia -> Bezpieczeństwo danych, 3 ostatnie).
+
+* Co 14 dni przypomni o kopii do pliku. Zrób ją i wyślij
+  sobie mailem — to jedyna kopia, która przetrwa
+  odinstalowanie aplikacji lub reset telefonu.
+
+* Dane zniknął tylko wtedy, gdy odinstalujesz aplikację
+  albo wyczyścisz jej dane w ustawieniach telefonu.
+
+
+-----------------------------------------------------------
+AKTUALIZACJE — WAŻNE
+-----------------------------------------------------------
+
+Gdy dostaniesz nową wersję APK, instalujesz ją PO WIERZCHU
+starej. Dane zostają nietknięte, nic nie trzeba przenosić.
+
+Warunek: nowa wersja musi być podpisana tym samym kluczem.
+Klucz jest zapisany na komputerze:
+
+   C:\Users\kulcz\.claude\projects\Dziennik Trenigowy\
+   dziennik-klucz.jks
+
+NIE KASUJ TEGO PLIKU. Bez niego nie da się zrobić
+aktualizacji instalowanej po wierzchu — trzeba by
+odinstalować aplikację (czyli stracić dane) i zainstalować
+od nowa. Zrób sobie kopię tego pliku razem z kopią danych.
+
+Hasło do klucza: dziennik2026
+
+
+-----------------------------------------------------------
+GDYBY COŚ NIE ZADZIAŁAŁO
+-----------------------------------------------------------
+
+"Aplikacja nie została zainstalowana"
+  -> najczęściej blokada instalacji z nieznanych źródeł,
+     patrz punkt 3 powyżej
+
+"Aplikacja w konflikcie z istniejącym pakietem"
+  -> masz już zainstalowaną wersję podpisaną innym kluczem;
+     zrób kopię danych, odinstaluj starą, zainstaluj nową
+
+Biały/pusty ekran po uruchomieniu
+  -> napisz, sprawdzę logi; aplikacja ma ~625 KB i przy
+     pierwszym starcie może chwilę mielić
